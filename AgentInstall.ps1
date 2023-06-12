@@ -18,7 +18,7 @@ if (Test-Path $installDir -PathType Container) {
 }
 if ($resetScratch -eq "Y") {
     Write-Host "You chose YES."
-    sc.exe create $serviceName
+    sc.exe create $serviceName binpath= $binPath
     Remove-Item -Path $installDir -Recurse -Force
     New-Item -ItemType Directory -Path $installDir
 }
@@ -41,6 +41,8 @@ if (Test-Path $zipFilePath -PathType Leaf) {
 
     # Unzip File
     Expand-Archive -Path $zipFilePath -DestinationPath (Split-Path -Path $zipFilePath -Parent)
+
+    sc.exe create $serviceName
 }
 
 # Update Subscription ID
@@ -91,7 +93,7 @@ Write-Host $agentUsername
 $completed = $false
 
 while (-not $completed) {
-    try {        
+    try {
         sc.exe config $serviceName binpath= $binPath start= $startType obj= $agentUsername password= $agentPassword
 
         $completed = $true
