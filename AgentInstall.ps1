@@ -27,7 +27,7 @@ $url = "https://shield-agent.s3.amazonaws.com/ShieldAgent.zip"
 $zipFilePath = $installDir + "\ShieldAgent.zip"
 
 if (Test-Path $zipFilePath -PathType Leaf) {
-    Write-Output "Zip file exists. Delete this directory if you wish to reinstall. $installDir"
+    Write-Output "Zip file exists."
 } else {
     Write-Output "Zip file does not exist. Downloading / Unzipping."
     $webClient = New-Object System.Net.WebClient
@@ -38,6 +38,27 @@ if (Test-Path $zipFilePath -PathType Leaf) {
     # Unzip File
     Expand-Archive -Path $zipFilePath -DestinationPath (Split-Path -Path $zipFilePath -Parent)
 }
+
+# Update Subscription ID
+$subscriptionID = Read-Host -Prompt "Enter Shield Subscription ID"
+
+# Specify the path to the JSON file
+$jsonFilePath = $installDir + "\HopliteAgent\appsettings.json"
+
+# Read the JSON file
+$jsonContent = Get-Content -Path $jsonFilePath -Raw
+
+# Convert the JSON content to a PowerShell object
+$jsonObject = $jsonContent | ConvertFrom-Json
+
+# Modify the desired variable
+$jsonObject.AppSettings.SubscriptionId = $subscriptionID
+
+# Convert the modified object back to JSON
+$modifiedJsonContent = $jsonObject | ConvertTo-Json -Depth 4
+
+# Save the modified JSON content back to the file
+$modifiedJsonContent | Set-Content -Path $jsonFilePath
 
 # Prompt Y/N for Nessus
 $confirmation = $null
