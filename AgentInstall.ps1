@@ -42,7 +42,7 @@ if (Test-Path $zipFilePath -PathType Leaf) {
     # Unzip File
     Expand-Archive -Path $zipFilePath -DestinationPath (Split-Path -Path $zipFilePath -Parent)
 
-    sc.exe create $serviceName
+    sc.exe create $serviceName binpath= $binPath
 }
 
 # Update Subscription ID
