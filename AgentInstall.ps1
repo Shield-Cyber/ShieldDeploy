@@ -1,4 +1,7 @@
 $installDir = "C:\ShieldAgent"
+$serviceName = "ShieldAgent"
+$binPath = $installDir + "\HopliteAgent\HopliteShield.Agent.exe"
+$startType = "delayed-auto"
 
 $resetScratch = $null
 
@@ -15,6 +18,7 @@ if (Test-Path $installDir -PathType Container) {
 }
 if ($resetScratch -eq "Y") {
     Write-Host "You chose YES."
+    sc.exe create $serviceName
     Remove-Item -Path $installDir -Recurse -Force
     New-Item -ItemType Directory -Path $installDir
 }
@@ -84,17 +88,11 @@ $agentPassword = $credential.GetNetworkCredential().Password
 Write-Host $agentUsername
 
 # Install Agent.exe as Service
-$serviceName = "ShieldAgent"
-$binPath = $installDir + "\HopliteAgent\HopliteShield.Agent.exe"
-$startType = "delayed-auto"
-
 $completed = $false
 
 while (-not $completed) {
     try {        
-        sc.exe delete $serviceName
-
-        sc.exe create $serviceName binpath= $binPath start= $startType obj= $agentUsername password= $agentPassword
+        sc.exe config $serviceName binpath= $binPath start= $startType obj= $agentUsername password= $agentPassword
 
         $completed = $true
     }
