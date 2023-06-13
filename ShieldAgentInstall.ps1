@@ -95,12 +95,12 @@ if ($scratchInstall -eq "Y") {
     }
 
     if ($nessusInfo -eq "Y") {
-        Write-Host "You chose YES."
-        Write-Host "This has yet to be implemented."
+        Write-Host "You chose YES." -ForegroundColor Yellow
+        Write-Host "This has yet to be implemented." -ForegroundColor Yellow
     }
     else {
-        Write-Host "You chose NO."
-        Write-Host "This has yet to be implemented."
+        Write-Host "You chose NO." -ForegroundColor Yellow
+        Write-Host "This has yet to be implemented." -ForegroundColor Yellow
     }
 
     # Update appsettings.json Configuration File
