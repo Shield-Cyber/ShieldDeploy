@@ -86,6 +86,9 @@ if ($scratchInstall -eq "Y") {
     # Get Subscription ID
     $subscriptionID = Read-Host "Subscription ID"
 
+    # Get Location Name
+    $locationName = Read-Host "Location Name"
+
     # Nessus Config Info
     $nessusInfo = $null
 
@@ -107,6 +110,7 @@ if ($scratchInstall -eq "Y") {
     $jsonContent = Get-Content -Path $appSettingsFilePath -Raw
     $jsonObject = $jsonContent | ConvertFrom-Json
     $jsonObject.AppSettings.SubscriptionId = $subscriptionID
+    $jsonObject.AppSettings.LocationName = $locationname
     # TODO Update Nessus Info
     $modifiedJsonContent = $jsonObject | ConvertTo-Json -Depth 4
     $modifiedJsonContent | Set-Content -Path $appSettingsFilePath
