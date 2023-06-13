@@ -99,11 +99,10 @@ if ($scratchInstall -eq "Y") {
 
     if ($nessusInfo -eq "Y") {
         Write-Host "You chose YES." -ForegroundColor Yellow
-        Write-Host "This has yet to be implemented." -ForegroundColor Yellow
-    }
-    else {
-        Write-Host "You chose NO." -ForegroundColor Yellow
-        Write-Host "This has yet to be implemented." -ForegroundColor Yellow
+        $xapikey = Read-Host "Nessus X-API-Key"
+        $useNessus = "true"
+    } else ($nessusInfo -eq "N") {
+        $useNessus = "false"
     }
 
     # Update appsettings.json Configuration File
@@ -111,7 +110,8 @@ if ($scratchInstall -eq "Y") {
     $jsonObject = $jsonContent | ConvertFrom-Json
     $jsonObject.AppSettings.SubscriptionId = $subscriptionID
     $jsonObject.AppSettings.LocationName = $locationname
-    # TODO Update Nessus Info
+    $jsonObject.AppSettings.xApiKey = $xapikey
+    $jsonObject.AppSettings.NessusEnabled = $useNessus
     $modifiedJsonContent = $jsonObject | ConvertTo-Json -Depth 4
     $modifiedJsonContent | Set-Content -Path $appSettingsFilePath
 
