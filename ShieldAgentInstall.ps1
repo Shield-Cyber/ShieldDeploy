@@ -101,7 +101,7 @@ if ($scratchInstall -eq "Y") {
         Write-Host "You chose YES." -ForegroundColor Yellow
         $xapikey = Read-Host "Nessus X-API-Key"
         $useNessus = "true"
-    } else ($nessusInfo -eq "N") {
+    } elseif ($nessusInfo -eq "N") {
         $useNessus = "false"
     }
 
