@@ -1,5 +1,4 @@
 # ShieldDeploy
 Scripts to deploy Hoplite Shield Agent.
 
-v1: AgentInstall.ps1
-v2: ShieldAgentInstall.ps1
+Run this script as Administrator or in an Admin Powershell Window.
