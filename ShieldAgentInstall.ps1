@@ -1,12 +1,12 @@
 $installDir = "C:\ShieldAgent"
 $serviceName = "Shield Agent"
-$binPath = $installDir + "\HopliteAgent\HopliteShield.Agent.exe"
+$binPath = $installDir + "\ShieldAgent\HopliteShield.Agent.exe"
 $startType = "delayed-auto"
 $scratchInstall = "Y"
 $zipURL = "https://shield-agent.s3.amazonaws.com/ShieldAgent.zip"
 $zipFilePath = $installDir + "\ShieldAgent.zip"
 $subscriptionID = "XXX-XXX-XXX"
-$appSettingsFilePath = $installDir + "\HopliteAgent\appsettings.json"
+$appSettingsFilePath = $installDir + "\ShieldAgent\appsettings.json"
 $agentCredntials = Get-Credential -Message "Domain User Creds: domain\username"
 $agentUsername = $agentCredntials.UserName
 $agentPassword = $agentCredntials.GetNetworkCredential().Password
