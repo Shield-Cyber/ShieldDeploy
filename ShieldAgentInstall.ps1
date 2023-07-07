@@ -82,6 +82,7 @@ if ($scratchInstall -eq "Y") {
 
     # Create Service
     sc.exe create $serviceName binpath= $binPath start= $startType obj= $agentUsername password= $agentPassword
+    Write-Host "Confirm create service above did not fail. If failed it is likely that the Credentials enetered were incorrect." -ForegroundColor Yellow
 
     # Get Subscription ID
     $subscriptionID = Read-Host "Subscription ID"
