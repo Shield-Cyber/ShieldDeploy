@@ -11,7 +11,7 @@ $agentCredntials = Get-Credential -Message "Domain User Creds: domain\username"
 $agentUsername = $agentCredntials.UserName
 $agentPassword = $agentCredntials.GetNetworkCredential().Password
 $dotnetInstallURL = "https://dot.net/v1/dotnet-install.ps1"
-$dotnetInstallPath = $installDir + "\dotnet-install.ps1"
+$dotnetInstallPath = $installDir + "\dotnet-install.ps1 --Runtime windowsdesktop"
 
 Write-Host "WARNING: This script will install the Shield Agent under the service name '$serviceName', if this service name already exists in your system it WILL be deleted. There will be a confirmation before this action occurs." -ForegroundColor Red
 Start-Sleep -Seconds 5
