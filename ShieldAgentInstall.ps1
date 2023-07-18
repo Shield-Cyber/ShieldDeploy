@@ -10,8 +10,8 @@ $appSettingsFilePath = $installDir + "\ShieldAgent\appsettings.json"
 $agentCredntials = Get-Credential -Message "Domain User Creds: domain\username"
 $agentUsername = $agentCredntials.UserName
 $agentPassword = $agentCredntials.GetNetworkCredential().Password
-$dotnetInstallURL = "https://dot.net/v1/dotnet-install.ps1"
-$dotnetInstallPath = $installDir + "\dotnet-install.ps1 --Runtime windowsdesktop"
+$dotnetInstallURL = "https://download.visualstudio.microsoft.com/download/pr/7727acb3-25ca-473b-a392-75afeb33cab7/f11f0477fd2fcfbb3111881377d0c9bb/windowsdesktop-runtime-7.0.9-win-x64.exe"
+$dotnetInstallPath = $installDir + "\windowsdesktop-runtime-7.0.9-win-x64.exe"
 
 Write-Host "WARNING: This script will install the Shield Agent under the service name '$serviceName', if this service name already exists in your system it WILL be deleted. There will be a confirmation before this action occurs." -ForegroundColor Red
 Start-Sleep -Seconds 5
@@ -54,8 +54,8 @@ if ($scratchInstall -eq "Y") {
     $webClient = New-Object System.Net.WebClient
     $webClient.DownloadFile($dotnetInstallURL, $dotnetInstallPath)
     $webClient.Dispose()
-    Write-Host "Installing DotNet Version 7.0.5..."
-    & $dotnetInstallPath -Runtime dotnet -Version 7.0.5
+    Write-Host "Installing DotNet Version 7.0.9..."
+    & $dotnetInstallPath /install /quiet /norestart
     Write-Host "Dependency Installation Successful" -ForegroundColor Green
 
     # Install Dependencies (AD Powershell)
